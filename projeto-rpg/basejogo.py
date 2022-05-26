@@ -21,15 +21,16 @@ while True: #loop principal do jogo
         if event.type == QUIT:
             pygame.quit()     #evento para sair do jogo
             exit()
-        if event.type == KEYDOWN:
-            if event.key == K_a:
-                x = x - 20
-            if event.key == K_d:
-                x = x + 20
-            if event.key == K_s:
-                y = y + 20
-            if event.key == K_w:
-                y = y - 20
+        
+
+        if pygame.key.get_pressed()[K_a]:
+            x_cobra = x_cobra - 10
+        if pygame.key.get_pressed()[K_d]:
+            x_cobra = x_cobra + 10
+        if pygame.key.get_pressed()[K_w]:
+            y_cobra = y_cobra - 10
+        if pygame.key.get_pressed()[K_s]:
+            y_cobra = y_cobra + 10
                    #onde   cor(r,g,b)  (x,y,larg,altura)
     pygame.draw.rect(tela, (255,0,0), (200,300,40,50)) #desenha um retangulo
                     #onde     cor(r,g,b)   (x,y)   (raio)
