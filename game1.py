@@ -10,8 +10,12 @@ sab = 0
 car = 0
 life = 10
 
-def separa():
+c = '\033[1;31m'
+cf = '\033[m'
+
+def linha():
     print('-='*50)
+
 
 def classes():
     loop = True
@@ -35,15 +39,16 @@ def classes():
 
 
 def escolha(): #escolha de ação
+    escolha.act = 0
     loop = True
     while loop:
-        if keyboard.is_pressed('s'):
-            escolha.act = 'S'
+        if keyboard.is_pressed('1'):
+            escolha.act = 1
             loop = False
             break
         else:
-            if keyboard.is_pressed('n'):
-                escolha.act = 'N'
+            if keyboard.is_pressed('2'):
+                escolha.act = 2
                 loop = False
                 break
 
@@ -71,6 +76,7 @@ def d20(scss, atrib):
         #print('Fracasso')
         d20.f_crit = False
         d20.fail = True
+
         
 def d4(crit):
     d4.d4 = random.randint(1, 4)
@@ -80,20 +86,27 @@ def d4(crit):
         d4.life -= d4.d4
     else:
         d4.life -= d4.d4 + d4.d4_2
+
+
+def op(t1, t2):
+   op.dec = '| 1-'+ t1 + ' | 2-'+ t2 +' |'
+   print(c,op.dec,cf)
+
+
     
 
 
-separa()
+linha()
 nome = input('Qual é seu nome, viajante? ').strip()
-separa()
+linha()
 
 print('Escolha uma classe: | 1-Guerreiro | 2-Mago | 3-Ladino | 4-Clérigo | ')
-separa()
+linha()
 
 classes()
                 
 print(f'É um prazer te conhecer {nome}!')
-separa()
+linha()
 
 sleep(1)
 
@@ -133,49 +146,52 @@ if classes.classe.upper() == 'CLERIGO' or classes.classe.upper() == 'CLÉRIGO':
     sab = 4
     car = 4
     life = life + con
-separa()
+linha()
 
-sleep(2)
+sleep(1)
 
-print('Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, deseja investigar? \nAperte S para sim e N para não.' )
-separa()
+print('Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, o que deseja fazer?')
+op('Investigar.', 'Passar direto.')
+linha()
 
 escolha()
 
-sleep(2)
+sleep(1)
 
-if escolha.act.upper() == 'S':
+if escolha.act == 1:
     print('Os hierógrifos te mostram: Viashinos devorando humanos ainda vivos!')
 else:
     print('Você anda até a entrada do corredor.')
-separa()
+linha()
 
-sleep(2)
+sleep(1)
 
-print('Você vê um longo corredor na sua frente, deseja continuar seguindo?  \nAperte S para sim e N para não.')
-separa()
+print('Você vê um longo corredor na sua frente, o que deseja fazer?')
+op('Continuar seguindo!', 'Voltar.')
+linha()
 
 escolha()
 
-sleep(2)
+sleep(1)
 
-if escolha.act.upper() == 'S':
+if escolha.act == 1:
     print('Você segue, vendo ossos humanos espalhados por todo o corredor.')
 else:
     print('Game Over!')
-separa()
+linha()
 
-sleep(2)
+sleep(1)
 
-print('No meio corredor, você avista uma pilha de ossos! Deseja investigar?  \nAperte S para sim e N para não.')
-separa()
+print('No meio corredor, você avista uma pilha de ossos! o que deseja fazer?')
+op('Investigar.', 'Passar direto.')
+linha()
 
 escolha()
 
-sleep(2)
+sleep(1)
 
-if escolha.act.upper() == 'S':
-    d20(20, sab)
+if escolha.act == 1:
+    d20(10, sab)
     if d20.fail == False:
         investigar_ossos = True
         print('Você analisa a pilha de ossos e descobre uma armadilha logo à frente!')
@@ -185,21 +201,22 @@ if escolha.act.upper() == 'S':
 else:
     print('Você passa direto pela pilha de ossos!')
     investigar_ossos = False
-separa() 
+linha() 
 
-sleep(2)
+sleep(1)
        
-print('Deseja continuar a andar no corredor? \nAperte S para sim e N para não.' )     
-separa() 
+print('O que deseja fazer?')
+op('Continuar pelo corredor.','Voltar.')     
+linha() 
 
 escolha()
 
-if escolha.act.upper() == 'S':
+if escolha.act == 1:
     if investigar_ossos == True:
         print('Você segue o corredor e não ativa a armadilha!')
     else:
         print('Ao seguir o corredor, você ouve um barulho de pedra se movendo e repentinamente são dispardos dardos das paredes!')
-        d20(30, dex)
+        d20(12, dex)
         if d20.fail == False:
             print('Você consegue desviar de todos os dardos e não sofre nenhum dano!')
         elif d20.f_crit == True:
@@ -209,7 +226,103 @@ if escolha.act.upper() == 'S':
             d4(d20.f_crit)
             print(f'Você tomou {d4.d4} de dano e está agora com {d4.life} de vida')                                               
 else:
-    print('Game Over!')                   
-separa()
+    print('Game Over!')              
+linha()
+
+sleep(1)
+
+print('Você vê dois caminhos, qual gostaria de seguir?')
+
+op('Esquerda', 'Direita')
+
+linha()
+
+escolha()
+
+sleep(1)
+
+
+if escolha.act == 1:
+    print('Você vê a entrada de mais um corredor à direita e a entrada de uma sala pequena! O que deseja fazer?')
+    op('Entrar na sala','Seguir à Direita')
+
+    linha()
+
+    escolha()
+
+    sleep(1)
+
+    if escolha.act == 1:
+        print('Ao entrar na sala, você se depara com um báu! O que deseja fazer?')
+        op('Abrir o báu', 'Voltar ao corredor')
+        linha()
+        escolha()
+        sleep(1)
+        if escolha.act == 1:
+            print('Você encontrou o Super Dildo, deseja equipá-lo agora?')
+            op('Sim', 'Não')
+            linha()
+            escolha()
+            sleep(1)
+            if escolha.act == 1:
+                print('Você equipou o Super Dildo!')
+                linha()
+                sleep(1)
+                print('O que deseja fazer?')
+                op('Sair da sala','Ficar na sala')
+                linha()
+                escolha()
+                sleep(1)
+                if escolha.act == 1:
+                    pass
+                else:
+                    print(f'{c}Game over{cf}')
+                    linha()
+                    sleep(3)
+                    exit()
+                    
+
+            else:
+                print('Você guardou o Super Dildo!')
+                linha()
+                sleep(1)
+                print('O que deseja fazer?')
+                op('Sair da sala','Ficar na sala')
+                linha()
+                escolha()
+                sleep(1)
+                if escolha.act == 1:
+                    pass
+                else:
+                    print(f'{c}Game over{cf}')
+                    linha()
+                    sleep(3)
+                    exit()
+
+            
+            
+        else:
+            print('Você segue o corredor pelo caminho da direita')
+            linha()
+            pass
+            
+    else:
+        pass
+
+print('Você vê a entrada de mais um corredor à direita e uma entrada estreita no meio do corredor atual. O que deseja fazer?')
+op('Segue à direita', 'Entra na entrada estreita')
+
+
+linha()
+
+
+
+
+
+
+
+
+
+
 
 input('Gostou do game? ')
