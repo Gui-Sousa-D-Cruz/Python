@@ -47,7 +47,7 @@ def escolha(): #escolha de ação
             escolha.act = 1
             loop = False
             break
-        else:
+        elif keyboard.is_pressed('2'):
             escolha.act = 2
             loop = False
             break
@@ -92,11 +92,9 @@ def d4(crit):
 
 
 def op(t1, t2):
-   op.dec = '| 1-'+ t1 + ' | 2-'+ t2 +' |' + ' 3-Menu. |'
+   op.dec = '| 1-'+ t1 + ' | 2-'+ t2 +' |'
    print(v,op.dec,l)
 
-if keyboard.is_pressed('m'):
-    print(life)               
 
 linha()
 nome = input('Qual é seu nome, viajante? ').strip()
@@ -148,6 +146,7 @@ if classes.classe.upper() == 'CLERIGO' or classes.classe.upper() == 'CLÉRIGO':
     sab = 4
     car = 4
     life = life + con
+
 linha()
 
 sleep(1)
