@@ -10,8 +10,9 @@ sab = 0
 car = 0
 life = 10
 
-c = '\033[1;31m'
-cf = '\033[m'
+v = '\033[1;31m'
+a = '\033[1;34m'
+l = '\033[m'
 
 def linha():
     print('-='*50)
@@ -90,17 +91,17 @@ def d4(crit):
 
 def op(t1, t2):
    op.dec = '| 1-'+ t1 + ' | 2-'+ t2 +' |'
-   print(c,op.dec,cf)
+   print(v,op.dec,l)
 
 
     
 
 
-linha()
+'''linha()
 nome = input('Qual é seu nome, viajante? ').strip()
 linha()
 
-print('Escolha uma classe: | 1-Guerreiro | 2-Mago | 3-Ladino | 4-Clérigo | ')
+print(f'{a}Escolha uma classe:{l} {v}| 1-Guerreiro | 2-Mago | 3-Ladino | 4-Clérigo |{l} ')
 linha()
 
 classes()
@@ -226,14 +227,14 @@ if escolha.act == 1:
             d4(d20.f_crit)
             print(f'Você tomou {d4.d4} de dano e está agora com {d4.life} de vida')                                               
 else:
-    print('Game Over!')              
+    print(f'{v}Game Over!{l}') '''             
 linha()
 
 sleep(1)
 
-print('Você vê dois caminhos, qual gostaria de seguir?')
+print('Você entra em uma nova câmara da pirâmide, à frente está um corredor e à esquerda tem uma porta. O que deseja fazer?')
 
-op('Esquerda', 'Direita')
+op('Seguir em frente.', 'Verificar a porta.')
 
 linha()
 
@@ -243,77 +244,41 @@ sleep(1)
 
 
 if escolha.act == 1:
-    print('Você vê a entrada de mais um corredor à direita e a entrada de uma sala pequena! O que deseja fazer?')
-    op('Entrar na sala','Seguir à Direita')
-
+    pass
+else:
+    print('Você verificou a porta e descobre uma pequena câmara. O que deseja fazer?')
+    op('Seguir em frente.','Entrar na pequena câmara.')
     linha()
-
     escolha()
-
     sleep(1)
-
     if escolha.act == 1:
-        print('Ao entrar na sala, você se depara com um báu! O que deseja fazer?')
-        op('Abrir o báu', 'Voltar ao corredor')
+        pass
+    else:
+        print('Ao entrar, você se depara com um báu. O que deseja fazer?')
+        op('Sair', 'Abrir o báu')
         linha()
         escolha()
         sleep(1)
         if escolha.act == 1:
-            print('Você encontrou o Super Dildo, deseja equipá-lo agora?')
-            op('Sim', 'Não')
+            print('Você retornou à câmara principal, mas ao sair a pequena câmara desmorona. O que deseja fazer?')
+            op('Seguir em frente', 'Voltar')
             linha()
             escolha()
             sleep(1)
             if escolha.act == 1:
-                print('Você equipou o Super Dildo!')
-                linha()
-                sleep(1)
-                print('O que deseja fazer?')
-                op('Sair da sala','Ficar na sala')
-                linha()
-                escolha()
-                sleep(1)
-                if escolha.act == 1:
-                    pass
-                else:
-                    print(f'{c}Game over{cf}')
-                    linha()
-                    sleep(3)
-                    exit()
-                    
-
+                pass
             else:
-                print('Você guardou o Super Dildo!')
+                print(f'{v}Game Over!{l}')
                 linha()
-                sleep(1)
-                print('O que deseja fazer?')
-                op('Sair da sala','Ficar na sala')
-                linha()
-                escolha()
-                sleep(1)
-                if escolha.act == 1:
-                    pass
-                else:
-                    print(f'{c}Game over{cf}')
-                    linha()
-                    sleep(3)
-                    exit()
-
-            
-            
+                exit()
         else:
-            print('Você segue o corredor pelo caminho da direita')
-            linha()
-            pass
-            
-    else:
-        pass
-
-print('Você vê a entrada de mais um corredor à direita e uma entrada estreita no meio do corredor atual. O que deseja fazer?')
-op('Segue à direita', 'Entra na entrada estreita')
+            print('ABRIU O BAU')
 
 
+print('Você chegou à mais uma câmara!')
 linha()
+   
+
 
 
 
