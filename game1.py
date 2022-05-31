@@ -97,7 +97,7 @@ def op(t1, t2):
     
 
 
-'''linha()
+linha()
 nome = input('Qual é seu nome, viajante? ').strip()
 linha()
 
@@ -227,7 +227,7 @@ if escolha.act == 1:
             d4(d20.f_crit)
             print(f'Você tomou {d4.d4} de dano e está agora com {d4.life} de vida')                                               
 else:
-    print(f'{v}Game Over!{l}') '''             
+    print(f'{v}Game Over!{l}')             
 linha()
 
 sleep(1)
