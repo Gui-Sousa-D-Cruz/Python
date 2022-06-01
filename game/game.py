@@ -8,7 +8,34 @@ con = 0
 int = 0
 sab = 0
 car = 0
-life = 10
+lbase = 10
+life = 10 + con
+hp = life
+
+lista = [pow, dex, con , int, sab, car, lbase, life, hp]
+
+class Item:
+    def __init__(self,nome, pow, dex, con, int, sab, car, life):
+        self.nome = nome
+        self.pow = pow
+        self.dex = dex
+        self.con = con
+        self.int = int
+        self.sab = sab
+        self.car = car
+        self.life = life
+
+item1 = Item('Poção de cura',0,0,0,0,0,
+0,1)
+item2 = Item('Escudo',5,5,5,5,5,5,5)
+item3 = Item('nome3',0,0,0,0,0,0,0)
+item4 = Item('nome4',0,0,0,0,0,0,0)
+item5 = Item('nome5',0,0,0,0,0,0,0)
+item6 = Item('nome6',0,0,0,0,0,0,0)
+
+bau1 = [item1, item2]
+
+ItemBau1 = random.choice(bau1)
 
 v = '\033[1;31m'
 a = '\033[1;34m'
@@ -80,15 +107,18 @@ def d20(scss, atrib):
         d20.f_crit = False
         d20.fail = True
 
-        
+
+      
 def d4(crit):
     d4.d4 = random.randint(1, 4)
     d4.d4_2 = random.randint(1, 4)
     d4.life = life
     if crit == False:
         d4.life -= d4.d4
+        d4.dano = d4.d4 + d4.d4_2
     else:
         d4.life -= d4.d4 + d4.d4_2
+        d4.dano = d4.d4 + d4.d4_2
 
 
 def op(t1, t2):
@@ -146,7 +176,6 @@ if classes.classe.upper() == 'CLERIGO' or classes.classe.upper() == 'CLÉRIGO':
     sab = 4
     car = 4
     life = life + con
-
 linha()
 
 sleep(1)
@@ -169,7 +198,7 @@ linha()
 sleep(1)
 
 print('Você vê um longo corredor na sua frente, o que deseja fazer?')
-op('Continuar seguindo!', 'Voltar.')
+op('Continuar seguindo.', 'Voltar.')
 linha()
 
 escolha()
@@ -224,11 +253,13 @@ if escolha.act == 1:
         elif d20.f_crit == True:
             d4(d20.f_crit)
             print(f'Você tomou {(d4.d4 + d4.d4_2)} de dano e está agora com {d4.life} de vida')
+            hp -= d4.dano
         else:
             d4(d20.f_crit)
-            print(f'Você tomou {d4.d4} de dano e está agora com {d4.life} de vida')                                               
+            print(f'Você tomou {d4.d4} de dano e está agora com {d4.life} de vida')
+            hp -= d4.dano                                               
 else:
-    print(f'{v}Game Over!{l}')             
+    print(f'{v}Game Over!{l}')            
 linha()
 
 sleep(1)
@@ -256,7 +287,7 @@ else:
         pass
     else:
         print('Ao entrar, você se depara com um báu. O que deseja fazer?')
-        op('Sair', 'Abrir o báu')
+        op('Sair.', 'Abrir o báu.')
         linha()
         escolha()
         sleep(1)
@@ -273,7 +304,105 @@ else:
                 linha()
                 exit()
         else:
-            print('ABRIU O BAU')
+            print(f'Você abriu o báu e achou: {ItemBau1.nome}!')
+            linha()
+            sleep(1)
+            if ItemBau1.nome == bau1[0].nome: 
+                print(f'Você guardou: {ItemBau1.nome}')
+                linha()
+                print('O que deseja fazer?')
+                op('Sair da pequena câmara', 'Ficar na pequena câmara')
+                linha()
+                escolha()
+                sleep(1)
+                if escolha.act == 1:
+                    print('Você retornou à câmara principal, mas ao sair a pequena câmara desmorona. O que deseja fazer?')
+                    op('Seguir em frente', 'Voltar')
+                    linha()
+                    escolha()
+                    sleep(1)
+                    if escolha.act == 1:
+                        pass
+                    else:
+                        print(f'{v}Game Over!{l}')
+                        linha()
+                        exit()
+
+                else:
+                    print('A pequena câmara desmorona em cima de você!')
+                    linha()
+                    print(f'{v}Game over!{l}')
+                    linha()
+                    exit()
+            
+            else:
+                print('Deseja equipar agora?')
+                op('Sim','Não')  
+                linha()
+                escolha()
+                sleep(1)
+                if escolha.act == 1:
+                    print(f'{a}Você equipou: {ItemBau1.nome}!{l}')
+                    print(lista)
+                    pow += ItemBau1.pow
+                    dex += ItemBau1.dex
+                    con += ItemBau1.con
+                    int += ItemBau1.int
+                    sab += ItemBau1.sab
+                    car += ItemBau1.car
+                    hp += ItemBau1.life
+                    print(lista)
+                    
+                    linha()
+                    print('O que deseja fazer?')
+                    op('Sair da pequena câmara', 'Ficar na pequena câmara')
+                    linha()
+                    escolha()
+                    sleep(1)
+                    if escolha.act == 1:
+                        print('Você retornou à câmara principal, mas ao sair a pequena câmara desmorona. O que deseja fazer?')
+                        op('Seguir em frente', 'Voltar')
+                        linha()
+                        escolha()
+                        sleep(1)
+                        if escolha.act == 1:
+                            pass
+                        else:
+                            print(f'{v}Game Over!{l}')
+                            linha()
+                            exit()
+                    else:
+                        print('A pequena câmara desmorona em cima de você!')
+                        linha()
+                        print(f'{v}Game Over!{l}')
+                        linha()
+                        exit()
+                else:
+                    print('O que deseja fazer?')
+                    op('Sair da pequena câmara', 'Ficar na pequena câmara')
+                    linha()
+                    escolha()
+                    sleep(1)
+                    if escolha.act == 1:
+                        print('Você retornou à câmara principal, mas ao sair a pequena câmara desmorona. O que deseja fazer?')
+                        op('Seguir em frente', 'Voltar')
+                        linha()
+                        escolha()
+                        sleep(1)
+                        if escolha.act == 1:
+                            pass
+                        else:
+                            print(f'{v}Game Over!{l}')
+                            linha()
+                            exit()
+                    else:
+                        print('A pequena câmara desmorona em cima de você!')
+                        linha()
+                        print(f'{v}Game Over!{l}')
+                        linha()
+                        exit()
+                    
+            
 
 
 print('Você chegou à mais uma câmara!')
