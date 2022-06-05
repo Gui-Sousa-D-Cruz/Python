@@ -37,6 +37,7 @@ bau1 = [item1, item2]
 
 ItemBau1 = random.choice(bau1)
 
+
 v = '\033[1;31m'
 a = '\033[1;34m'
 l = '\033[m'
@@ -192,7 +193,7 @@ if escolha.act == 1:
     print('Os hierógrifos te mostram: Viashinos devorando humanos ainda vivos!')
 else:
     print('Você anda até a entrada do corredor.')
- 
+
 linha()
 
 sleep(1)
@@ -235,7 +236,7 @@ else:
 linha() 
 
 sleep(1)
-       
+    
 print('O que deseja fazer?')
 op('Continuar pelo corredor.','Voltar.')     
 linha() 
@@ -407,7 +408,7 @@ else:
 
 print('Você chegou à mais uma câmara!')
 linha()
-   
+
 
 
 
@@ -421,3 +422,4 @@ linha()
 
 
 input('Gostou do game? ')
+
