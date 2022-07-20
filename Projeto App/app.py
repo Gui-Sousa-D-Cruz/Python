@@ -10,3 +10,5 @@ GUI = Builder.load_file('tela.kv')
 class Comanda(App):
     def build(self):
         return GUI
+
+Comanda().run()
