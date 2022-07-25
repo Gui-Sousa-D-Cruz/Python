@@ -1,14 +1,13 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-import keyboard
 
-class tela(BoxLayout):
+class adder(BoxLayout):
     pass
 
-class Game(App):
+class Test4(App):
     def build(self):
-        return tela()
+        return adder()
         
-   
 
-Game().run()
+
+Test4().run()
