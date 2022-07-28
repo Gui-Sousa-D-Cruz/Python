@@ -1,17 +1,76 @@
-<tela>:
-    orientation:'vertical'
-    Label:
-        text:''
-    Label:
-        id:lb1
-        text:'Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, o que deseja fazer?'
-    Label:
-        text:''
-    Button:
-        id:bt1
-        text:'Investigar.'
-        on_press: act = 1
-    Button:
-        id:bt2
-        text:'Passar Direto.'
-        on_press: act = 2,  
+<Gerenciador>:
+    Screen:
+        Button:
+            text:'Entrar'
+            on_release: root.current = 'tela1'
+    Tela1:
+        name: 'tela1'
+    Tela2_1:
+        name: 'tela2_1'
+    Tela2_2:
+        name: 'tela2_2'
+
+<Tela1>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                id:cena
+                text:'Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, o que deseja fazer?'
+            Label:
+                text:''
+        BoxLayout:
+            orientation:'vertical'
+            Button:
+                id:bt1
+                text:'Investigar.'
+                on_release: app.root.current = 'tela2_1'
+            Button:
+                id:bt2
+                text:'Passar Direto.'
+                on_release: app.root.current = 'tela2_2'
+
+<Tela2_1>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                id:cena
+                text:'LOREM1'
+            Label:
+                text:''
+        BoxLayout:
+            orientation:'vertical'
+            Button:
+                id:bt1
+                text:'ACAO1'
+                on_release: 
+            Button:
+                id:bt2
+                text:'ACAO2'
+                on_release: 
+<Tela2_2>:
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                id:cena
+                text:'LOREM2'
+            Label:
+                text:''
+        BoxLayout:
+            orientation:'vertical'
+            Button:
+                id:bt1
+                text:'ACAO1'
+                on_release: 
+            Button:
+                id:bt2
+                text:'ACAO2'
+                on_release: 
