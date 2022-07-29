@@ -179,5 +179,30 @@
             
 <Status>:
     BoxLayout:
-        Label:
-            text:'STATUS'
+        orientation: 'vertical'
+        BoxLayout:
+            Label:
+                text:'STATUS'
+            
+        BoxLayout:
+            orientation:'vertical'
+            BoxLayout:
+                Label:
+                    text:''
+                Label:
+                    text:''
+                Label:
+                    text:''
+            BoxLayout:
+                orientation:'horizontal'
+                Label:
+                    text:''
+                Label:
+                    text:''
+                Button:
+                    text:'Voltar'
+                    on_release: app.root.current = ''
+                Label:
+                    text:''
+                Label:
+                    text:''
