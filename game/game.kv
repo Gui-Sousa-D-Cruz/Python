@@ -55,6 +55,10 @@
                 id:bt4
                 text:'Status.'
                 on_release: app.root.current = 'status'
+        BoxLayout:
+            Button:
+                text:'teste'
+
             
 
 
@@ -66,20 +70,41 @@
             Label:
                 text:''
             Label:
-                id:cena
-                text:'LOREM1'
+                text:''
             Label:
                 text:''
         BoxLayout:
-            orientation:'vertical'
+            Label:
+                id:cena
+                text:'LOREM1'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                text:''
+            Label:
+                text:''
+        BoxLayout:
             Button:
                 id:bt1
                 text:'ACAO1'
-                on_release: 
+                on_release: app.root.current = ''
             Button:
                 id:bt2
                 text:'ACAO2'
-                on_release: 
+                on_release: app.root.current = ''
+        BoxLayout:
+            Button:
+                id:bt3
+                text:'Inventário.'
+                on_release: app.root.current = 'inventario'
+            Button:
+                id:bt4
+                text:'Status.'
+                on_release: app.root.current = 'status'
+        BoxLayout:
+            Button:
+                text:'teste'
 <Tela2_2>:
     BoxLayout:
         orientation:'vertical'
@@ -87,20 +112,41 @@
             Label:
                 text:''
             Label:
-                id:cena
-                text:'LOREM2'
+                text:''
             Label:
                 text:''
         BoxLayout:
-            orientation:'vertical'
+            Label:
+                id:cena
+                text:'LOREM2'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                text:''
+            Label:
+                text:''
+        BoxLayout:
             Button:
                 id:bt1
                 text:'ACAO1'
-                on_release: 
+                on_release: app.root.current = ''
             Button:
                 id:bt2
                 text:'ACAO2'
-                on_release: 
+                on_release: app.root.current = ''
+        BoxLayout:
+            Button:
+                id:bt3
+                text:'Inventário.'
+                on_release: app.root.current = 'inventario'
+            Button:
+                id:bt4
+                text:'Status.'
+                on_release: app.root.current = 'status'
+        BoxLayout:
+            Button:
+                text:'teste'
 <Inventario>:
     BoxLayout:
         orientation: 'vertical'
