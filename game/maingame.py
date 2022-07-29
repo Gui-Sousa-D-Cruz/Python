@@ -11,7 +11,7 @@ class Tela1(Screen):
 
 class Tela2_1(Screen):
     pass
-
+    
 class Tela2_2(Screen):
     pass
 

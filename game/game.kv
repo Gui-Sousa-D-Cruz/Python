@@ -17,12 +17,21 @@
             Label:
                 text:''
             Label:
-                id:cena
-                text:'Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, o que deseja fazer?'
+                text:''
             Label:
                 text:''
         BoxLayout:
-            orientation:'vertical'
+            Label:
+                id:cena
+                text:'Ao adentrar a pirâmide, você nota diversos hierógrifos na parede, o que deseja fazer?'
+        BoxLayout:
+            Label:
+                text:''
+            Label:
+                text:''
+            Label:
+                text:''
+        BoxLayout:
             Button:
                 id:bt1
                 text:'Investigar.'
@@ -31,6 +40,10 @@
                 id:bt2
                 text:'Passar Direto.'
                 on_release: app.root.current = 'tela2_2'
+        BoxLayout:
+            Button:
+            Button:
+            
 
 <Tela2_1>:
     BoxLayout:
