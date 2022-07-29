@@ -15,6 +15,12 @@ class Tela2_1(Screen):
 class Tela2_2(Screen):
     pass
 
+class Inventario(Screen):
+    pass
+
+class Status(Screen):
+    pass
+
 
 
 
