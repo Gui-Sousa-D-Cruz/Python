@@ -1,8 +1,8 @@
 from tkinter import *
+import customtkinter
 
-from idna import valid_contextj
 
-app = Tk()
+app = customtkinter.CTk()
 app.title('Game')
 app.geometry('768x600')
 app.configure(background='#93A9EB')
