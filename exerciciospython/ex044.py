@@ -1,5 +1,6 @@
 print('========== LOJAS GUIGUI ==========')
 val = int(input('Valor da compra: R$ '))
+print('==================================')
 print('FORMAS DE PAGAMENTO ')
 print('''[ 1 ] à vista dinheiro/cheque.
 [ 2 ] à vista cartão de débito.
@@ -50,8 +51,16 @@ while True:
         
         break #loop principal
     elif opc == 4:
-        print('Digite uma opção válida.')
+        por = val * 20 / 100
+        jur = val + por
+        p = int(input('Digite o número de parcelas:'))
         print('==================================')
+        print(f'Sua compra será parcelada em {p} vezes!')
+        print(f'O valor da compra será R$ {jur}!')
+        print(f'Serão {p} parcelas de R$ {jur / p}!')
+
+        print('==================================')
+        break #loop principal
         
     else:
         print('Digite uma opção válida.')
