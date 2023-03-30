@@ -34,18 +34,18 @@ while True:#loop principal
     print('PO!!!')
     print('-='*20)
     print('')
-    print(f'O jogador escolheu {jogador}')
+    print(f'O jogador escolheu {jogador}!')
     print('')
-    print(f'A máquina escolheu {pc}')
+    print(f'A máquina escolheu {pc}!')
     print('')
     print('-='*20)
     
     if jogador == 'pedra' and pc == 'tesoura' or jogador == 'papel' and pc == 'pedra' or jogador == 'tesoura' and pc == 'papel':
-        print('Vitória do jogador')
+        print('Vitória do jogador!!!')
     elif jogador == pc:
         print('Empate')
     else:
-        print('Vitória da máquina')
+        print('Vitória da máquina!!!')
     print('-='*20)
     print('''Jogar novamente?
 [ 1 ] Sim
