@@ -56,8 +56,8 @@ while True:
         p = int(input('Digite o número de parcelas:'))
         print('==================================')
         print(f'Sua compra será parcelada em {p} vezes!')
-        print(f'O valor da compra será R$ {jur}!')
-        print(f'Serão {p} parcelas de R$ {jur / p}!')
+        print(f'O valor da compra será R$ {jur:.2f}!')
+        print(f'Serão {p} parcelas de R$ {jur / p:.2f}!')
 
         print('==================================')
         break #loop principal
@@ -65,3 +65,4 @@ while True:
     else:
         print('Digite uma opção válida.')
         print('==================================')
+        
