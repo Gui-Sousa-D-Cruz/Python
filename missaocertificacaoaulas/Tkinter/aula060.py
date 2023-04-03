@@ -18,8 +18,6 @@ if con.is_connected():
     
     
 
-
-
 def salvar():
     nome = str(inp1.get())
     telefone = str(inp2.get())
@@ -35,11 +33,29 @@ def salvar():
     inp3.delete(0, END)
     inp4.delete('1.0', END)
 
-'''def consultar():
+def consultar():
     comando = 'SELECT * FROM dados'
     cursor.execute(comando)
     resultado = cursor.fetchall()
-    print(resultado)'''
+    lista = int(len(resultado[0]))
+    visual =['Id: ','Nome: ', 'Número: ', 'Email: ', 'Observação: ']
+    c = 0
+    cl = 0
+    while True:
+        while True:
+            if c < lista and cl < len(resultado):
+                print(f'{visual[c]}{resultado[cl][c]}')
+                c += 1
+            else:
+                print('')
+                c = 0
+                break
+                
+        if cl < len(resultado):
+            cl += 1
+        else:
+            break
+     
 
 app = Tk()
 app.title('Estudos')
@@ -69,11 +85,11 @@ inp4=Text(app)
 #metodo que permite digitar texto de varias linhas
 inp4.place(x=10,y=180,width=300,height=80)
 
-btn1=Button(app, text='Imprimir', command=salvar)
+btn1=Button(app, text='Salvar', command=salvar)
 btn1.place(x=10,y=270,width=100,height=20)
 
-'''btn2=Button(app, text='Consultar', command=consultar)
-btn2.place(x=130,y=270,width=100,height=20)'''
+btn2=Button(app, text='Consultar', command=consultar)
+btn2.place(x=130,y=270,width=100,height=20)
 
 
 app.mainloop()
