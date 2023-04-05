@@ -8,6 +8,8 @@ con = mysql.connector.connect(
     password=''
 )
 
+print(x)
+
 if con.is_connected():
     dbInfo = con.get_server_info()
     print(f'Conectado ao servidor MySQL {dbInfo}')
