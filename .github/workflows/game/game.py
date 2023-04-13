@@ -32,7 +32,7 @@ class Classe():
         print(self.cha)
         
 
-
+#Funções
 
 def d20(scss, atrib):
     d20.sucesso = scss
@@ -65,6 +65,9 @@ def d4(crit):
     else:
         d4.d4 = d4.n + d4.n_2
     
+def hist(jal):
+    hist.hist = historico.append(jal)   
+    print(historico[1:])
     
 #VARIAVEIS
 historico = []
@@ -73,7 +76,7 @@ leng = int(len(historico))
 nome = ''
 clas = ''
 
-classe = Classe(0,0,0,0,4,0)
+classe = Classe(0,0,0,0,0,0)
 pow = classe.pow
 dex = classe.dex
 con = classe.con
@@ -84,20 +87,27 @@ hpmax= classe.hp
 hp = hpmax
 manamax= classe.mana
 mana = manamax
+lMANA= 0
 dano = 0
 porcHP= int((100 * hp) / hpmax)
 porcMANA= int((100 * mana) / manamax)
 
 
+def porcentagem(hp, hpmax, mana, manamax):
+    porcentagem.hp = hp
+    porcentagem.porcHP = int((100 * hp) / hpmax)
+    porcentagem.porcMANA= int((100 * mana) / manamax)
+    
 #LAYOUT DAS JANELAS
 def inventario():
+    
     layout = [
-        [sg.Text(f'Nome:   {nome}',size=(18,0)),sg.T(f'Classe:    {clas}', size=(18,0))],
-        [sg.Push(),sg.Text('HP :',size=(6,0)),sg.ProgressBar(100, orientation='h', s=(30, 20), k='hp', ), sg.Push(), sg.Text(f'{hp}/{hpmax}')],
-        [sg.Push(),sg.Text('MANA :'),sg.ProgressBar(100, orientation='h', s=(30, 20), k='mana'),sg.Push(), sg.Text(f'{mana}/{manamax}')],
+        [sg.Text(f'Nome:   {nome}',size=(18,0),k='nome'),sg.T(f'Classe:    {clas}', size=(18,0),k='classe')],
+        [sg.Push(),sg.Text('HP :',size=(6,0)),sg.ProgressBar(100, orientation='h', s=(30, 20), k='hp', ), sg.Push(), sg.Text(f'{hp}/{hpmax}',k='hpt')],
+        [sg.Push(),sg.Text('MANA :'),sg.ProgressBar(100, orientation='h', s=(30, 20), k='mana'),sg.Push(), sg.Text(f'{mana}/{manamax}', k='manat')],
         [
         sg.Push(),
-        sg.Listbox(['','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''], no_scrollbar=True, s=(20, 15)),
+        sg.Listbox(['','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''], no_scrollbar=True, s=(20, 15),k='atri'),
         sg.Push(),
          sg.Listbox([''], no_scrollbar=True, s=(20, 15)),
          sg.Push(),
@@ -191,17 +201,16 @@ def janela_7_2():
 
 
 #CRIAÇÃO DE JANELAS
-invent = None
-janelax=None
-janela1 = None
+invent = inventario()
+janela1 = janela_1()
 janela2 = None
 janela3 = None
 janela4 = None
 janela5 = None
-janela6 = janela_6()
+janela6 = None
 janela7 = None
 
-
+invent.hide()
 
 
 #LOOP DE LEITURA DOS EVENTOS
@@ -209,7 +218,7 @@ historico.append(janela1)
 while True:
     
     janela,evento,valor = sg.read_all_windows()
-    print(historico)
+    
     # FECHAR O JOGO
     
     if evento == sg.WIN_CLOSED:
@@ -219,11 +228,35 @@ while True:
     #INVENTARIO
     
     if evento == 'Inventário':
-        invent=inventario()
         invent['hp'].update(porcHP)
         invent['mana'].update(porcMANA)
+        invent['hpt'].update(f'{hp}/{hpmax}')
+        invent['manat'].update(f'{mana}/{manamax}')
+        invent['nome'].update(f'Nome:   {nome.capitalize()}')
+        invent['classe'].update(f'Classe:    {clas.capitalize()}')
+        invent['atri'].update(['','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''])
         
+        invent.un_hide()
         
+        if historico[leng-1] == 'janela5':
+            janela5.hide()
+        if historico[leng-1] == 'janela6':
+            janela6.hide()
+        if historico[leng-1] == 'janela7':
+            janela7.hide()
+
+        
+    if janela == invent:
+        if evento == 'Voltar':
+            if historico[leng-1] == 'janela5':
+               invent.hide()
+               janela5.un_hide()
+            if historico[leng-1] == 'janela6':
+                invent.hide()
+                janela6.un_hide()
+            if historico[leng-1] == 'janela7':
+                invent.hide()
+                janela7.un_hide()
     
     #PRÉ MENU
     
@@ -231,7 +264,7 @@ while True:
         janela2 = janela_2()
         janela2.un_hide()
         janela1.hide()
-        historico.append('janela2')
+        hist('janela2')
     elif janela == janela1 and evento == 'Não':
         sg.popup('Volte quando estiver pronto')
         janela.close()
@@ -241,14 +274,27 @@ while True:
     
     if janela == janela2 and evento == 'Continuar':
         nome = janela2['nome'].get()
-        janela3 =janela_3()
-        janela2.hide()
-        historico.append('janela3')
+        if nome == '':
+            popup = sg.Window('RPG', [[sg.T('Escolha um nome válido!')], [sg.Push(),sg.Yes(s=10, button_text='OK' ),sg.Push()]], disable_close=True).read(close=True)
+        else:
+            janela3 =janela_3()
+            janela2.hide()
+            hist('janela3')
         
     #TELA DE REGISTRO DE CLASSE
     
     if janela == janela3 and evento == 'Guerreiro':
         classe = Classe(4,0,4,3,1,2)
+        pow = classe.pow
+        dex = classe.dex
+        con = classe.con
+        inT = classe.int
+        wis = classe.wis
+        cha = classe.cha
+        hpmax= classe.hp
+        hp = hpmax
+        manamax= classe.mana
+        mana = manamax
         clas = 'guerreiro'
         janela4 = janela_4()
         janela3.hide()
@@ -256,6 +302,16 @@ while True:
         
     if janela == janela3 and evento == 'Mago':
         classe = Classe(0,3,2,4,4,1)
+        pow = classe.pow
+        dex = classe.dex
+        con = classe.con
+        inT = classe.int
+        wis = classe.wis
+        cha = classe.cha
+        hpmax= classe.hp
+        hp = hpmax
+        manamax= classe.mana
+        mana = manamax
         clas = 'mago'
         janela4 = janela_4()
         janela3.hide()
@@ -263,23 +319,43 @@ while True:
         
     if janela == janela3 and evento == 'Ladino':
         classe = Classe(1,4,0,3,2,4)
+        pow = classe.pow
+        dex = classe.dex
+        con = classe.con
+        inT = classe.int
+        wis = classe.wis
+        cha = classe.cha
+        hpmax= classe.hp
+        hp = hpmax
+        manamax= classe.mana
+        mana = manamax
         clas = 'ladino'
         janela4 = janela_4()
         janela3.hide()
-        historico.append('janela4')
+        hist('janela4')
         
     if janela == janela3 and evento == 'Clérigo':
         classe = Classe(0,1,2,3,4,4)
+        pow = classe.pow
+        dex = classe.dex
+        con = classe.con
+        inT = classe.int
+        wis = classe.wis
+        cha = classe.cha
+        hpmax= classe.hp
+        hp = hpmax
+        manamax= classe.mana
+        mana = manamax
         clas = 'clérigo'
         janela4 = janela_4()
         janela3.hide()
-        historico.append('janela4')
+        hist('janela4')
     #INTRODUÇÃO 
 
     if janela == janela4 and evento == 'Continuar':
         janela5 = janela_5()
         janela4.hide()
-        historico.append('janela5')
+        hist('janela5')
     
     #
     
@@ -291,7 +367,8 @@ while True:
         if evento == 'Ir pro corredor':
             janela6 = janela_6()
             janela5.hide()
-            historico.append('janela6')
+            hist('janela6')
+
             
     #
     
@@ -304,7 +381,8 @@ while True:
                 popup = sg.Window('RPG', [[sg.T('Você analisa a pilha de ossos e descobre uma armadilha logo à frente!')], [sg.Push(),sg.Yes(s=10, button_text='OK' ),sg.Push()]], disable_close=True).read(close=True)
                 janela7 = janela_7_1()
                 janela6.hide()
-                historico.append('janela7')
+                hist('janela7')
+    
             else:
                 pista = False
                 popup = sg.Window('RPG', [[sg.T('A pilha de ossos não diz nada a você.')], [sg.Push(),sg.Yes(s=10, button_text='OK' ),sg.Push()]], disable_close=True).read(close=True)
@@ -312,24 +390,36 @@ while True:
                 d4(fcrit)
                 dano = d4.d4
                 hp -= dano
+                porcentagem(hp,hpmax,mana,manamax)
+                hp = porcentagem.hp
+                porcHP = porcentagem.porcHP
+                porcMANA = porcentagem.porcMANA
                 janela7 = janela_7_2()
                 janela6.hide()
-                historico.append('janela7')
+                hist('janela7')
+    
 
                                   
         if evento == 'Continuar andando':
-            d4(False)
+            d4(True)
             dano = d4.d4
             hp -= dano
+            porcentagem(hp,hpmax,mana,manamax)
+            hp = porcentagem.hp
+            porcHP = porcentagem.porcHP
+            porcMANA = porcentagem.porcMANA
             janela7 = janela_7_2()
             janela6.hide()
+            hist('janela7')
+            print(hp)
+
 
     #
     
     if janela == janela7:
         pass
     
-    if janela == invent:
-        if evento == 'Voltar':
-           
+    
+            
+               
            
