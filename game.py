@@ -14,15 +14,15 @@ def janela_0():
 
 #CLASSE
 class Classe():
-    def __init__(self,pow,dex,con,int,wis,cha):
+    def __init__(self,pow,dex,con,int,wis,cha,hp,mana):
         self.pow = pow
         self.dex = dex
         self.con = con
         self.int = int
         self.wis = wis
         self.cha = cha
-        self.hp = 10 + con 
-        self.mana = 10 + int
+        self.hp = hp + con 
+        self.mana = mana + int
     def atributos(self):
         print(self.pow)
         print(self.dex)
@@ -75,8 +75,9 @@ leng = int(len(historico))
 
 nome = ''
 clas = ''
+lvl = 0
 
-classe = Classe(0,0,0,0,0,0)
+classe = Classe(0,0,0,0,0,0,1,1)
 pow = classe.pow
 dex = classe.dex
 con = classe.con
@@ -102,12 +103,12 @@ def porcentagem(hp, hpmax, mana, manamax):
 def inventario():
     
     layout = [
-        [sg.Text(f'Nome:   {nome}',size=(18,0),k='nome'),sg.T(f'Classe:    {clas}', size=(18,0),k='classe')],
-        [sg.Push(),sg.Text('HP :',size=(6,0)),sg.ProgressBar(100, orientation='h', s=(30, 20), k='hp', ), sg.Push(), sg.Text(f'{hp}/{hpmax}',k='hpt')],
+        [sg.Text(f'Nome:   {nome}',size=(18,0),k='nome'),sg.T(f'Classe:    {clas}', size=(18,0),k='classe'),sg.T(f'Lvl:  {lvl}', k='lvl')],
+        [sg.Push(),sg.Text('HP :',size=(4,0)),sg.ProgressBar(100, orientation='h', s=(30, 20), k='hp', ), sg.Push(), sg.Text(f'{hp}/{hpmax}',k='hpt')],
         [sg.Push(),sg.Text('MANA :'),sg.ProgressBar(100, orientation='h', s=(30, 20), k='mana'),sg.Push(), sg.Text(f'{mana}/{manamax}', k='manat')],
         [
         sg.Push(),
-        sg.Listbox(['','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''], no_scrollbar=True, s=(20, 15),k='atri'),
+        sg.Listbox(['','Atributos','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''], no_scrollbar=True, s=(20, 15),k='atri'),
         sg.Push(),
          sg.Listbox([''], no_scrollbar=True, s=(20, 15)),
          sg.Push(),
@@ -144,8 +145,8 @@ def janela_3():
         [],
         [sg.Push(), sg.Text('Escolha uma classe:'), sg.Push()],
         [],
-        [sg.Button('Guerreiro',size=(15,2)),sg.Button('Mago',size=(15,2))],
-        [sg.Button('Ladino',size=(15,2)),sg.Button('Clérigo',size=(15,2))],
+        [sg.Button('Guerreiro',size=(20,2)),sg.Button('Mago',size=(20,2))],
+        [sg.Button('Ladino',size=(20,2)),sg.Button('Clérigo',size=(20,2))],
         [],
     ]
     return sg.Window('RPG', layout=layout, finalize=True)
@@ -166,7 +167,9 @@ def janela_5():
         
         [sg.Push(), sg.Text('Após a emboscada, você e seu grupo foram separados, você acorda numa pequena câmara dentro da pirâmide, há um alçapão no teto e apenas uma saída que da para um corredor, você nota na parade diversos hierógrifos.', pad=(27.5,27.5,3.5,3.5),size=(55,0)), sg.Push()],
         [sg.Push(),sg.Text('O que deseja fazer?',pad=(0,0,2,2),size=(0,2)), sg.Push()],
-        [sg.Push(), sg.Button('Investigar a parede',size=(15,2)), sg.Push(),sg.Button('Ir pro corredor',size=(15,2)), sg.Push(), sg.Button('Inventário',size=(15,2)), sg.Push()],
+        [sg.Push(), sg.Button('Investigar a parede',size=(20,2)), sg.Push(),sg.Button('Ir pro corredor',size=(20,2)), sg.Push()],
+        [],
+        [sg.Push(), sg.Button('Habilidades',size=(20,2)),sg.Push(),sg.Button('Inventário',size=(20,2)),sg.Push()],
         [],
     ]
     return sg.Window('RPG', layout=layout, finalize=True)
@@ -234,7 +237,8 @@ while True:
         invent['manat'].update(f'{mana}/{manamax}')
         invent['nome'].update(f'Nome:   {nome.capitalize()}')
         invent['classe'].update(f'Classe:    {clas.capitalize()}')
-        invent['atri'].update(['','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''])
+        invent['lvl'].update(f'Lvl:  {lvl}')
+        invent['atri'].update(['','        ATRIBUTOS:','',f'        Força: {pow} ','',f'        Agilidade: {dex}','',f'        Constituição: {con}','',f'        Inteligência: {inT}','',f'        Sabedoria: {wis}','',f'        Carisma: {cha}',''])
         
         invent.un_hide()
         
@@ -284,7 +288,7 @@ while True:
     #TELA DE REGISTRO DE CLASSE
     
     if janela == janela3 and evento == 'Guerreiro':
-        classe = Classe(4,0,4,3,1,2)
+        classe = Classe(0,0,0,0,0,0,1,1)
         pow = classe.pow
         dex = classe.dex
         con = classe.con
@@ -301,7 +305,7 @@ while True:
         historico.append('janela4')
         
     if janela == janela3 and evento == 'Mago':
-        classe = Classe(0,3,2,4,4,1)
+        classe = Classe(0,0,0,0,0,0,1,1)
         pow = classe.pow
         dex = classe.dex
         con = classe.con
@@ -318,7 +322,7 @@ while True:
         historico.append('janela4')
         
     if janela == janela3 and evento == 'Ladino':
-        classe = Classe(1,4,0,3,2,4)
+        classe = Classe(0,0,0,0,0,0,1,1)
         pow = classe.pow
         dex = classe.dex
         con = classe.con
@@ -335,7 +339,7 @@ while True:
         hist('janela4')
         
     if janela == janela3 and evento == 'Clérigo':
-        classe = Classe(0,1,2,3,4,4)
+        classe = Classe(0,0,0,0,0,0,1,1)
         pow = classe.pow
         dex = classe.dex
         con = classe.con
@@ -350,6 +354,7 @@ while True:
         janela4 = janela_4()
         janela3.hide()
         hist('janela4')
+        
     #INTRODUÇÃO 
 
     if janela == janela4 and evento == 'Continuar':
