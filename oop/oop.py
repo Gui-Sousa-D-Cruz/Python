@@ -1,6 +1,6 @@
 #IMPORTANDO CLASSES
 
-from classes import Vendedor
+from oop.classes import Vendedor
 
 vendedor1 = Vendedor('Gui')
 vendedor1.venda(1000)
