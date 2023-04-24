@@ -14,7 +14,11 @@ def janela_1():
 cotacoes = requests.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL")
 cotacoes_dic = cotacoes.json()
 cotacao_dolar = float(cotacoes_dic['USDBRL']['bid'])
+print('')
+print(cotacoes_dic)
+print('')
 print(cotacao_dolar)
+print('')
 
 janela1=janela_1()
 
@@ -32,7 +36,7 @@ while True:
         break
     if evento == 'Converter':
         valor = int(valor['valor'])
-        dolar = float(valor*cotacao_dolar)
+        dolar = float(valor/cotacao_dolar)
         sg.popup(f'R$ {valor:.2f} é o equivalente a US$ {dolar:.2f}')
             
         #dolar = float(cotacao_dolar*valor)
